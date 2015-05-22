@@ -37,6 +37,7 @@ button.eager-back-to-top-button {
   -moz-transition: opacity .3s ease-in-out;
   transition: opacity .3s ease-in-out;
   pointer-events: none;
+  z-index: 7000;
 }
 
 @media (max-width: 786px) {
