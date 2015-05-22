@@ -1,0 +1,14 @@
+{
+  "resources": {
+    "body": [
+      {
+        "type": "style",
+        "src": "./body.css"
+      },
+      {
+        "type": "script",
+        "src": "./body.js"
+      }
+    ]
+  }
+}
