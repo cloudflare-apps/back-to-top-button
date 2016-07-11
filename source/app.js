@@ -1,6 +1,8 @@
 (function () {
   if (!window.addEventListener) return // Check for IE9+
 
+  const {tinycolor} = window
+  const getComputedStyle = document.defaultView.getComputedStyle || window.getComputedStyle
   const topThreshhold = 100 // px
   let animation = null
   let duration = null // ms
@@ -10,6 +12,32 @@
 
   let options = INSTALL_OPTIONS
   let element
+  let text
+
+  function getColors() {
+    let backgroundColor
+
+    if (options.backgroundColor) {
+      backgroundColor = tinycolor(options.backgroundColor)
+    }
+    else {
+      const documentBackgroundColor = getComputedStyle(document.body).backgroundColor
+      const components = tinycolor(documentBackgroundColor).toHsl()
+
+      // Find contrasting color.
+      components.l = Math.abs((components.l + 0.5) % 1) + (1 - components.s) * 0.15
+      backgroundColor = tinycolor(components)
+    }
+
+    const iconColor = backgroundColor.clone()
+
+    backgroundColor.setAlpha(0.18)
+
+    return {
+      backgroundColor: backgroundColor.toRgbString(),
+      iconColor: iconColor.toRgbString()
+    }
+  }
 
   function easeInOutQuad(t, b, c, d) {
     t /= d / 2
@@ -50,14 +78,41 @@
     requestAnimationFrame(animateLoop)
   }
 
+  function setVisibility() {
+    if (!element) return
+
+    const visibility = window.scrollY > topThreshhold ? "visible" : "hidden"
+
+    element.setAttribute("visibility", visibility)
+  }
+
+  function setShape() {
+    if (!element) return
+
+    element.setAttribute("shape", options.shape)
+  }
+
+  function setColors() {
+    if (!element || !text) return
+
+    const {backgroundColor, iconColor} = getColors()
+
+    element.style.backgroundColor = backgroundColor
+    text.style.color = iconColor
+  }
+
   function updateElement() {
     element = Eager.createElement({selector: "body", method: "append"}, element)
-    const text = document.createElement("text")
-
     element.setAttribute("app-id", "back-to-top-button")
+    element.addEventListener("click", backToTop)
+
+    text = document.createElement("text")
+    text.textContent = "⇧"
     element.appendChild(text)
 
-    element.addEventListener("click", backToTop)
+    setVisibility()
+    setShape()
+    setColors()
   }
 
   if (document.readyState === "loading") {
@@ -77,22 +132,18 @@
     }
   })
 
-  window.addEventListener("scroll", () => {
-    if (!element) return
-
-    const visibility = element.getAttribute("visibility")
-    const nextVisibility = window.scrollY > topThreshhold ? "visible" : "hidden"
-
-    if (visibility !== nextVisibility) {
-      element.setAttribute("visibility", nextVisibility)
-    }
-  })
+  window.addEventListener("scroll", setVisibility)
 
   window.INSTALL_SCOPE = {
-    setOptions(nextOptions) {
+    updateColors(nextOptions) {
       options = nextOptions
 
-      updateElement()
+      setColors()
+    },
+    updateShape(nextOptions) {
+      options = nextOptions
+
+      setShape()
     }
   }
 }())

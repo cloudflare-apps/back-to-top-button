@@ -1,7 +1,6 @@
 eager-app[app-id="back-to-top-button"] {
   background: #ccc;
   background-color: rgba(0, 0, 0, .1);
-  border-radius: 5px;
   bottom: 25px;
   cursor: pointer;
   display: block;
@@ -31,11 +30,19 @@ eager-app[app-id="back-to-top-button"] {
   z-index: 7000;
 }
 
+
 eager-app[app-id="back-to-top-button"][visibility="visible"] {
   pointer-events: all;
   opacity: 1;
 }
 
+eager-app[app-id="back-to-top-button"][shape="rounded"] {
+  border-radius: 5px;
+}
+
+eager-app[app-id="back-to-top-button"][shape="circle"] {
+  border-radius: 50%;
+}
 
 @media (max-width: 786px) {
   eager-app[app-id="back-to-top-button"] {
@@ -43,16 +50,20 @@ eager-app[app-id="back-to-top-button"][visibility="visible"] {
     width: 50px;
     font-size: 25px;
     line-height: 50px;
-    border-radius: 3px;
     right: 10px;
     bottom: 10px;
   }
+
+  eager-app[app-id="back-to-top-button"][shape="rounded"] {
+    border-radius: 3px;
+  }
+
 }
 
-eager-app[app-id="back-to-top-button"] text,
-eager-app[app-id="back-to-top-button"] text:before,
-eager-app[app-id="back-to-top-button"] text:after {
+eager-app[app-id="back-to-top-button"] text {
   bottom: 0;
+  color: #aaa;
+  color: rgba(0, 0, 0, .4);
   display: block;
   height: 100%;
   left: 0;
@@ -62,10 +73,3 @@ eager-app[app-id="back-to-top-button"] text:after {
   top: 0;
   width: 100%;
 }
-
-eager-app[app-id="back-to-top-button"] text:before {
-  color: #aaa;
-  color: rgba(0, 0, 0, .4);
-  content: "\21E7";
-}
-

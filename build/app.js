@@ -3,6 +3,10 @@
 (function () {
   if (!window.addEventListener) return; // Check for IE9+
 
+  var _window = window;
+  var tinycolor = _window.tinycolor;
+
+  var getComputedStyle = document.defaultView.getComputedStyle || window.getComputedStyle;
   var topThreshhold = 100; // px
   var animation = null;
   var duration = null; // ms
@@ -12,6 +16,31 @@
 
   var options = INSTALL_OPTIONS;
   var element = void 0;
+  var text = void 0;
+
+  function getColors() {
+    var backgroundColor = void 0;
+
+    if (options.backgroundColor) {
+      backgroundColor = tinycolor(options.backgroundColor);
+    } else {
+      var documentBackgroundColor = getComputedStyle(document.body).backgroundColor;
+      var components = tinycolor(documentBackgroundColor).toHsl();
+
+      // Find contrasting color.
+      components.l = Math.abs((components.l + 0.5) % 1) + (1 - components.s) * 0.15;
+      backgroundColor = tinycolor(components);
+    }
+
+    var iconColor = backgroundColor.clone();
+
+    backgroundColor.setAlpha(0.18);
+
+    return {
+      backgroundColor: backgroundColor.toRgbString(),
+      iconColor: iconColor.toRgbString()
+    };
+  }
 
   function easeInOutQuad(t, b, c, d) {
     t /= d / 2;
@@ -51,14 +80,45 @@
     requestAnimationFrame(animateLoop);
   }
 
+  function setVisibility() {
+    if (!element) return;
+
+    var visibility = window.scrollY > topThreshhold ? "visible" : "hidden";
+
+    element.setAttribute("visibility", visibility);
+  }
+
+  function setShape() {
+    if (!element) return;
+
+    element.setAttribute("shape", options.shape);
+  }
+
+  function setColors() {
+    if (!element || !text) return;
+
+    var _getColors = getColors();
+
+    var backgroundColor = _getColors.backgroundColor;
+    var iconColor = _getColors.iconColor;
+
+
+    element.style.backgroundColor = backgroundColor;
+    text.style.color = iconColor;
+  }
+
   function updateElement() {
     element = Eager.createElement({ selector: "body", method: "append" }, element);
-    var text = document.createElement("text");
-
     element.setAttribute("app-id", "back-to-top-button");
+    element.addEventListener("click", backToTop);
+
+    text = document.createElement("text");
+    text.textContent = "⇧";
     element.appendChild(text);
 
-    element.addEventListener("click", backToTop);
+    setVisibility();
+    setShape();
+    setColors();
   }
 
   if (document.readyState === "loading") {
@@ -77,22 +137,18 @@
     }
   });
 
-  window.addEventListener("scroll", function () {
-    if (!element) return;
-
-    var visibility = element.getAttribute("visibility");
-    var nextVisibility = window.scrollY > topThreshhold ? "visible" : "hidden";
-
-    if (visibility !== nextVisibility) {
-      element.setAttribute("visibility", nextVisibility);
-    }
-  });
+  window.addEventListener("scroll", setVisibility);
 
   window.INSTALL_SCOPE = {
-    setOptions: function setOptions(nextOptions) {
+    updateColors: function updateColors(nextOptions) {
       options = nextOptions;
 
-      updateElement();
+      setColors();
+    },
+    updateShape: function updateShape(nextOptions) {
+      options = nextOptions;
+
+      setShape();
     }
   };
 })();
