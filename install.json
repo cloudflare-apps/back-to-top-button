@@ -3,12 +3,23 @@
     "body": [
       {
         "type": "style",
-        "src": "./body.css"
+        "src": "./build/app.css"
       },
       {
         "type": "script",
-        "src": "./body.js"
+        "src": "./build/app.js"
       }
     ]
+  },
+  "preview": {
+    "handlers": [
+      {
+        "options": ["*"],
+        "execute": "INSTALL_SCOPE.setOptions(INSTALL_OPTIONS)"
+      }
+    ]
+  },
+  "options": {
+    "properties": {}
   }
 }
