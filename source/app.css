@@ -26,6 +26,14 @@ eager-app[app-id="back-to-top-button"] {
   z-index: 7000;
 }
 
+eager-app[app-id="back-to-top-button"]:hover {
+  filter: brightness(108%);
+}
+
+eager-app[app-id="back-to-top-button"]:active {
+  transform: translate3d(0, 1px, 0);
+}
+
 eager-app[app-id="back-to-top-button"][visibility="visible"] {
   pointer-events: all;
   opacity: 1;
