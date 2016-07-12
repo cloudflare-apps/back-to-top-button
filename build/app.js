@@ -42,6 +42,7 @@
     var iconColor = backgroundColor.clone();
 
     backgroundColor.setAlpha(0.2);
+    iconColor.setAlpha(0.9);
 
     return {
       backgroundColor: backgroundColor.toRgbString(),
