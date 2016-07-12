@@ -18,8 +18,12 @@
   "preview": {
     "handlers": [
       {
-        "options": ["backgroundColor"],
+        "options": ["color"],
         "execute": "INSTALL_SCOPE.updateColors(INSTALL_OPTIONS)"
+      },
+      {
+        "options": ["icon"],
+        "execute": "INSTALL_SCOPE.updateIcon(INSTALL_OPTIONS)"
       },
       {
         "options": ["shape"],
@@ -29,17 +33,62 @@
   },
   "options": {
     "properties": {
-      "backgroundColor": {
-        "title": "Background color",
-        "description": "Defaults to contrasting color.",
+      "color": {
+        "title": "Color",
         "order": 0,
+        "type": "object",
+        "properties": {
+          "strategy": {
+            "title": "Background color",
+            "order": 0,
+            "type": "string",
+            "format": "radios",
+            "default": "automatic",
+            "enum": [
+              "automatic",
+              "custom"
+            ],
+            "enumNames": {
+              "automatic": "Automatic",
+              "custom": "Custom"
+            }
+          },
+
+          "custom": {
+            "showIf": {
+              "color.strategy": "custom"
+            },
+            "default": "#666666",
+            "title": "Custom background color",
+            "order": 1,
+            "type": "string",
+            "format": "color"
+          }
+        }
+      },
+
+      "icon": {
+        "title": "Icon",
+        "order": 1,
         "type": "string",
-        "format": "color"
+        "default": "fancy",
+        "enum": [
+          "fancy",
+          "line",
+          "pointer",
+          "triangle"
+        ],
+        "enumNames": {
+          "fancy": "Fancy",
+          "line": "Line",
+          "pointer": "Pointer",
+          "triangle": "Triangle"
+        }
       },
 
       "shape": {
         "title": "Shape",
-        "order": 1,
+        "order": 2,
         "type": "string",
         "default": "rounded",
         "enum": [

@@ -30,7 +30,6 @@ eager-app[app-id="back-to-top-button"] {
   z-index: 7000;
 }
 
-
 eager-app[app-id="back-to-top-button"][visibility="visible"] {
   pointer-events: all;
   opacity: 1;
@@ -60,16 +59,22 @@ eager-app[app-id="back-to-top-button"][shape="circle"] {
 
 }
 
-eager-app[app-id="back-to-top-button"] text {
+eager-app[app-id="back-to-top-button"] eager-icon {
   bottom: 0;
-  color: #aaa;
-  color: rgba(0, 0, 0, .4);
   display: block;
+  fill: #666666;
+  fill: rgba(0, 0, 0, .4);
   height: 100%;
   left: 0;
   pointer-events: none;
   position: absolute;
   right: 0;
   top: 0;
+  width: 100%;
+}
+
+eager-app[app-id="back-to-top-button"] eager-icon > svg {
+  display: block;
+  height: 100%;
   width: 100%;
 }
