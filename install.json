@@ -3,12 +3,105 @@
     "body": [
       {
         "type": "style",
-        "src": "./body.css"
+        "src": "./build/app.css"
       },
       {
         "type": "script",
-        "src": "./body.js"
+        "src": "./build/app.js"
       }
     ]
+  },
+  "preview": {
+    "handlers": [
+      {
+        "options": ["color"],
+        "execute": "INSTALL_SCOPE.updateColors(INSTALL_OPTIONS)"
+      },
+      {
+        "options": ["icon"],
+        "execute": "INSTALL_SCOPE.updateIcon(INSTALL_OPTIONS)"
+      },
+      {
+        "options": ["shape"],
+        "execute": "INSTALL_SCOPE.updateShape(INSTALL_OPTIONS)"
+      }
+    ]
+  },
+  "options": {
+    "properties": {
+      "color": {
+        "title": "Color",
+        "order": 0,
+        "type": "object",
+        "properties": {
+          "strategy": {
+            "notitle": true,
+            "order": 0,
+            "type": "string",
+            "format": "radios",
+            "default": "automatic",
+            "enum": [
+              "automatic",
+              "dark",
+              "light",
+              "custom"
+            ],
+            "enumNames": {
+              "automatic": "Automatic",
+              "dark": "Dark",
+              "light": "Light",
+              "custom": "Custom"
+            }
+          },
+
+          "custom": {
+            "showIf": {
+              "color.strategy": "custom"
+            },
+            "default": "#666666",
+            "title": "Custom background color",
+            "order": 1,
+            "type": "string",
+            "format": "color"
+          }
+        }
+      },
+
+      "icon": {
+        "title": "Icon",
+        "order": 1,
+        "type": "string",
+        "default": "fancy",
+        "enum": [
+          "fancy",
+          "line",
+          "pointer",
+          "triangle"
+        ],
+        "enumNames": {
+          "fancy": "Fancy",
+          "line": "Line",
+          "pointer": "Pointer",
+          "triangle": "Triangle"
+        }
+      },
+
+      "shape": {
+        "title": "Shape",
+        "order": 2,
+        "type": "string",
+        "default": "rounded",
+        "enum": [
+          "square",
+          "rounded",
+          "circle"
+        ],
+        "enumNames": {
+          "square": "Square",
+          "rounded": "Rounded",
+          "circle": "Circle"
+        }
+      }
+    }
   }
 }
