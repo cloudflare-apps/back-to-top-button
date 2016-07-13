@@ -69,7 +69,7 @@ eager-app[app-id="back-to-top-button"][shape="circle"] {
 
 }
 
-eager-app[app-id="back-to-top-button"] eager-icon {
+eager-app[app-id="back-to-top-button"] .eager-icon {
   bottom: 0;
   display: block;
   fill: #666666;
@@ -80,11 +80,5 @@ eager-app[app-id="back-to-top-button"] eager-icon {
   position: absolute;
   right: 0;
   top: 0;
-  width: 100%;
-}
-
-eager-app[app-id="back-to-top-button"] eager-icon > svg {
-  display: block;
-  height: 100%;
   width: 100%;
 }

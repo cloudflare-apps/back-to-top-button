@@ -7,10 +7,6 @@
       },
       {
         "type": "script",
-        "src": "./vendor/tinycolor.js"
-      },
-      {
-        "type": "script",
         "src": "./build/app.js"
       }
     ]
@@ -39,17 +35,21 @@
         "type": "object",
         "properties": {
           "strategy": {
-            "title": "Background color",
+            "notitle": true,
             "order": 0,
             "type": "string",
             "format": "radios",
             "default": "automatic",
             "enum": [
               "automatic",
+              "dark",
+              "light",
               "custom"
             ],
             "enumNames": {
               "automatic": "Automatic",
+              "dark": "Dark",
+              "light": "Light",
               "custom": "Custom"
             }
           },
