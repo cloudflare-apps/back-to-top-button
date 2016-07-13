@@ -957,8 +957,8 @@ var ICONS = Object.freeze({
 
 
 	    var backgroundColor = function () {
-	      if (strategy === "dark") return tinycolor$1("#000000");
-	      if (strategy === "light") return tinycolor$1("#ffffff");
+	      if (strategy === "dark") return tinycolor$1("#878787");
+	      if (strategy === "light") return tinycolor$1("#ededed");
 	      if (strategy === "custom") return tinycolor$1(options.color.custom);
 
 	      // Find contrasting color.

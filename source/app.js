@@ -26,8 +26,8 @@ import easeInOutQuad from "./ease-in-out-quad"
     const {strategy} = options.color
 
     const backgroundColor = (() => {
-      if (strategy === "dark") return tinycolor("#000000")
-      if (strategy === "light") return tinycolor("#ffffff")
+      if (strategy === "dark") return tinycolor("#878787")
+      if (strategy === "light") return tinycolor("#ededed")
       if (strategy === "custom") return tinycolor(options.color.custom)
 
       // Find contrasting color.
