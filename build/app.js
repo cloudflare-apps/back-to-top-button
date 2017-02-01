@@ -948,7 +948,7 @@ var ICONS = Object.freeze({
 	  var xmlns = "http://www.w3.org/2000/svg";
 	  var icon = document.createElementNS(xmlns, "svg");
 
-	  icon.setAttribute("class", "eager-icon");
+	  icon.setAttribute("class", "cloudflare-icon");
 	  icon.setAttributeNS(null, "viewBox", "0 0 256 256");
 	  icon.setAttributeNS(null, "version", "1.1");
 
@@ -963,9 +963,8 @@ var ICONS = Object.freeze({
 
 	      // Find contrasting color.
 
-	      var _getComputedStyle = getComputedStyle(document.body);
-
-	      var backgroundColor = _getComputedStyle.backgroundColor;
+	      var _getComputedStyle = getComputedStyle(document.body),
+	          backgroundColor = _getComputedStyle.backgroundColor;
 
 	      var components = tinycolor$1(backgroundColor).toHsl();
 
@@ -1027,11 +1026,9 @@ var ICONS = Object.freeze({
 	  function setColors() {
 	    if (!element) return;
 
-	    var _getColors = getColors();
-
-	    var backgroundColor = _getColors.backgroundColor;
-	    var iconColor = _getColors.iconColor;
-
+	    var _getColors = getColors(),
+	        backgroundColor = _getColors.backgroundColor,
+	        iconColor = _getColors.iconColor;
 
 	    element.style.backgroundColor = backgroundColor;
 	    icon.style.fill = iconColor;
@@ -1052,7 +1049,7 @@ var ICONS = Object.freeze({
 	  }
 
 	  function updateElement() {
-	    element = document.createElement("eager-app");
+	    element = document.createElement("cloudflare-app");
 
 	    element.setAttribute("app-id", "back-to-top-button");
 	    element.addEventListener("click", backToTop);

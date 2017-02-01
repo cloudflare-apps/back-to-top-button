@@ -1,4 +1,4 @@
-eager-app[app-id="back-to-top-button"] {
+cloudflare-app[app-id="back-to-top-button"] {
   background: #ccc;
   background-color: rgba(0, 0, 0, .1);
   bottom: 25px;
@@ -30,31 +30,31 @@ eager-app[app-id="back-to-top-button"] {
   z-index: 7000;
 }
 
-eager-app[app-id="back-to-top-button"]:hover {
+cloudflare-app[app-id="back-to-top-button"]:hover {
   -webkit-filter: brightness(108%);
           filter: brightness(108%);
 }
 
-eager-app[app-id="back-to-top-button"]:active {
+cloudflare-app[app-id="back-to-top-button"]:active {
   -webkit-transform: translate3d(0, 1px, 0);
           transform: translate3d(0, 1px, 0);
 }
 
-eager-app[app-id="back-to-top-button"][visibility="visible"] {
+cloudflare-app[app-id="back-to-top-button"][visibility="visible"] {
   pointer-events: all;
   opacity: 1;
 }
 
-eager-app[app-id="back-to-top-button"][shape="rounded"] {
+cloudflare-app[app-id="back-to-top-button"][shape="rounded"] {
   border-radius: 5px;
 }
 
-eager-app[app-id="back-to-top-button"][shape="circle"] {
+cloudflare-app[app-id="back-to-top-button"][shape="circle"] {
   border-radius: 50%;
 }
 
 @media (max-width: 786px) {
-  eager-app[app-id="back-to-top-button"] {
+  cloudflare-app[app-id="back-to-top-button"] {
     height: 50px;
     width: 50px;
     font-size: 25px;
@@ -63,13 +63,13 @@ eager-app[app-id="back-to-top-button"][shape="circle"] {
     bottom: 10px;
   }
 
-  eager-app[app-id="back-to-top-button"][shape="rounded"] {
+  cloudflare-app[app-id="back-to-top-button"][shape="rounded"] {
     border-radius: 3px;
   }
 
 }
 
-eager-app[app-id="back-to-top-button"] .eager-icon {
+cloudflare-app[app-id="back-to-top-button"] .cloudflare-icon {
   bottom: 0;
   display: block;
   fill: #666666;

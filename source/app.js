@@ -18,7 +18,7 @@ import easeInOutQuad from "./ease-in-out-quad"
   const xmlns = "http://www.w3.org/2000/svg"
   const icon = document.createElementNS(xmlns, "svg")
 
-  icon.setAttribute("class", "eager-icon")
+  icon.setAttribute("class", "cloudflare-icon")
   icon.setAttributeNS(null, "viewBox", "0 0 256 256")
   icon.setAttributeNS(null, "version", "1.1")
 
@@ -114,7 +114,7 @@ import easeInOutQuad from "./ease-in-out-quad"
   }
 
   function updateElement() {
-    element = document.createElement("eager-app")
+    element = document.createElement("cloudflare-app")
 
     element.setAttribute("app-id", "back-to-top-button")
     element.addEventListener("click", backToTop)
