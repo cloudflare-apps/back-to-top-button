@@ -13,16 +13,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EagerApps/BackToTopButton.git"
+    "url": "git+https://github.com/CloudflareApps/BackToTopButton.git"
   },
   "author": "Eager",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EagerApps/BackToTopButton/issues"
+    "url": "https://github.com/CloudflareApps/BackToTopButton/issues"
   },
-  "homepage": "https://github.com/EagerApps/BackToTopButton#readme",
+  "homepage": "https://github.com/CloudflareApps/BackToTopButton#readme",
   "dependencies": {
-    "tinycolor2": "EagerApps/TinyColor#v2.0.1"
+    "tinycolor2": "CloudflareApps/TinyColor#v2.0.1"
   },
   "devDependencies": {
     "autoprefixer": "6.3.6",
