@@ -1,10 +1,11 @@
-import tinycolor from "tinycolor2"
-import * as ICONS from "./icons"
-import easeInOutQuad from "./ease-in-out-quad"
+import tinycolor from 'tinycolor2'
+import * as ICONS from './icons'
+import easeInOutQuad from './ease-in-out-quad'
 
 (function () {
   if (!window.addEventListener) return // Check for IE9+
 
+  const {requestAnimationFrame, cancelAnimationFrame} = window
   const getComputedStyle = document.defaultView.getComputedStyle || window.getComputedStyle
   const topThreshhold = 100 // px
   let animation = null
@@ -15,20 +16,20 @@ import easeInOutQuad from "./ease-in-out-quad"
 
   let options = INSTALL_OPTIONS
   let element
-  const xmlns = "http://www.w3.org/2000/svg"
-  const icon = document.createElementNS(xmlns, "svg")
+  const xmlns = 'http://www.w3.org/2000/svg'
+  const icon = document.createElementNS(xmlns, 'svg')
 
-  icon.setAttribute("class", "cloudflare-icon")
-  icon.setAttributeNS(null, "viewBox", "0 0 256 256")
-  icon.setAttributeNS(null, "version", "1.1")
+  icon.setAttribute('class', 'cloudflare-icon')
+  icon.setAttributeNS(null, 'viewBox', '0 0 256 256')
+  icon.setAttributeNS(null, 'version', '1.1')
 
-  function getColors() {
+  function getColors () {
     const {strategy} = options.color
 
     const backgroundColor = (() => {
-      if (strategy === "dark") return tinycolor("#878787")
-      if (strategy === "light") return tinycolor("#ededed")
-      if (strategy === "custom") return tinycolor(options.color.custom)
+      if (strategy === 'dark') return tinycolor('#878787')
+      if (strategy === 'light') return tinycolor('#ededed')
+      if (strategy === 'custom') return tinycolor(options.color.custom)
 
       // Find contrasting color.
       const {backgroundColor} = getComputedStyle(document.body)
@@ -50,13 +51,13 @@ import easeInOutQuad from "./ease-in-out-quad"
     }
   }
 
-  function resetPositions() {
+  function resetPositions () {
     startTime = null
     startPosition = null
     backToTopping = false
   }
 
-  function animateLoop(time) {
+  function animateLoop (time) {
     if (!startTime) startTime = time
 
     const timeSoFar = time - startTime
@@ -66,13 +67,12 @@ import easeInOutQuad from "./ease-in-out-quad"
 
     if (timeSoFar < duration) {
       animation = requestAnimationFrame(animateLoop)
-    }
-    else {
+    } else {
       resetPositions()
     }
   }
 
-  function backToTop() {
+  function backToTop () {
     if (backToTopping) return
 
     backToTopping = true
@@ -82,15 +82,15 @@ import easeInOutQuad from "./ease-in-out-quad"
     requestAnimationFrame(animateLoop)
   }
 
-  function setVisibility() {
+  function setVisibility () {
     if (!element) return
 
-    const visibility = window.scrollY > topThreshhold ? "visible" : "hidden"
+    const visibility = window.scrollY > topThreshhold ? 'visible' : 'hidden'
 
-    element.setAttribute("visibility", visibility)
+    element.setAttribute('visibility', visibility)
   }
 
-  function setColors() {
+  function setColors () {
     if (!element) return
 
     const {backgroundColor, iconColor} = getColors()
@@ -99,25 +99,25 @@ import easeInOutQuad from "./ease-in-out-quad"
     icon.style.fill = iconColor
   }
 
-  function setIcon() {
-    icon.innerHTML = ""
-    const path = document.createElementNS(xmlns, "path")
+  function setIcon () {
+    icon.innerHTML = ''
+    const path = document.createElementNS(xmlns, 'path')
 
-    path.setAttributeNS(null, "d", ICONS[options.icon])
+    path.setAttributeNS(null, 'd', ICONS[options.icon])
     icon.appendChild(path)
   }
 
-  function setShape() {
+  function setShape () {
     if (!element) return
 
-    element.setAttribute("shape", options.shape)
+    element.setAttribute('shape', options.shape)
   }
 
-  function updateElement() {
-    element = document.createElement("cloudflare-app")
+  function updateElement () {
+    element = document.createElement('cloudflare-app')
 
-    element.setAttribute("app-id", "back-to-top-button")
-    element.addEventListener("click", backToTop)
+    element.setAttribute('app-id', 'back-to-top-button')
+    element.addEventListener('click', backToTop)
 
     setVisibility()
     setIcon()
@@ -129,10 +129,10 @@ import easeInOutQuad from "./ease-in-out-quad"
     document.body.appendChild(element)
   }
 
-  function bootstrap() {
+  function bootstrap () {
     updateElement()
 
-    window.addEventListener("blur", () => {
+    window.addEventListener('blur', () => {
       if (backToTopping) {
         cancelAnimationFrame(animation)
         resetPositions()
@@ -140,28 +140,27 @@ import easeInOutQuad from "./ease-in-out-quad"
       }
     })
 
-    window.addEventListener("scroll", setVisibility)
+    window.addEventListener('scroll', setVisibility)
   }
 
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", bootstrap)
-  }
-  else {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', bootstrap)
+  } else {
     bootstrap()
   }
 
   window.INSTALL_SCOPE = {
-    updateColors(nextOptions) {
+    updateColors (nextOptions) {
       options = nextOptions
 
       setColors()
     },
-    updateIcon(nextOptions) {
+    updateIcon (nextOptions) {
       options = nextOptions
 
       setIcon()
     },
-    updateShape(nextOptions) {
+    updateShape (nextOptions) {
       options = nextOptions
 
       setShape()

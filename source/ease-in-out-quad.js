@@ -1,4 +1,4 @@
-export default function easeInOutQuad(t, b, c, d) {
+export default function easeInOutQuad (t, b, c, d) {
   t /= d / 2
   if (t < 1) return c / 2 * t * t + b
   t--
