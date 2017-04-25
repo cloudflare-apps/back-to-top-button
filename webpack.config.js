@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const standardOptions = require('./package.json').standard
 
 const environment = process.env.NODE_ENV || 'development'
 const $ = {}
@@ -27,21 +28,32 @@ if (environment === 'production') {
 
 $.module = {
   rules: [
+    // Use the latest CSS with PostCSS.
     {
       test: /\.css$/,
       loaders: 'file-loader?name=[name].[ext]!extract-loader!css-loader!postcss-loader'
     },
+    // Use the latest JavaScript with Babel.
     { test: /\.js$/, exclude: modulePattern, loader: 'babel-loader' },
+    // Catch errors as you develop.
     {
-      enforce: 'pre',
       test: /\.js?$/,
-      loader: 'standard-loader',
+      enforce: 'pre',
       exclude: modulePattern,
+      loader: 'standard-loader',
       options: {
         error: false,
         snazzy: true,
         parser: 'babel-eslint'
       }
+    },
+    // Format the final compiled output.
+    {
+      test: /\.js$/,
+      enforce: 'post',
+      // exclude: modulePattern,
+      loader: 'standard-format-loader',
+      options: standardOptions
     }
   ]
 }
