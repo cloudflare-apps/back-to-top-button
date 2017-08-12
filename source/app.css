@@ -1,7 +1,6 @@
-cloudflare-app[app-id="back-to-top-button"] {
+cloudflare-app[app="back-to-top-button"] {
   background: #ccc;
   background-color: rgba(0, 0, 0, .1);
-  bottom: 25px;
   cursor: pointer;
   display: block;
   font-family: sans-serif;
@@ -16,7 +15,6 @@ cloudflare-app[app-id="back-to-top-button"] {
   opacity: 0;
   pointer-events: none;
   position: fixed;
-  right: 25px;
   tap-highlight-color: transparent;
   text-align: center;
   text-rendering: optimizeLegibility;
@@ -26,29 +24,45 @@ cloudflare-app[app-id="back-to-top-button"] {
   z-index: 7000;
 }
 
-cloudflare-app[app-id="back-to-top-button"]:hover {
+cloudflare-app[app="back-to-top-button"][data-position^="top"] {
+  top: 25px;
+}
+
+cloudflare-app[app="back-to-top-button"][data-position^="bottom"] {
+  bottom: 25px;
+}
+
+cloudflare-app[app="back-to-top-button"][data-position$="left"] {
+  left: 25px;
+}
+
+cloudflare-app[app="back-to-top-button"][data-position$="right"] {
+  right: 25px;
+}
+
+cloudflare-app[app="back-to-top-button"]:hover {
   filter: brightness(108%);
 }
 
-cloudflare-app[app-id="back-to-top-button"]:active {
+cloudflare-app[app="back-to-top-button"]:active {
   transform: translate3d(0, 1px, 0);
 }
 
-cloudflare-app[app-id="back-to-top-button"][visibility="visible"] {
+cloudflare-app[app="back-to-top-button"][visibility="visible"] {
   pointer-events: all;
   opacity: 1;
 }
 
-cloudflare-app[app-id="back-to-top-button"][shape="rounded"] {
+cloudflare-app[app="back-to-top-button"][shape="rounded"] {
   border-radius: 5px;
 }
 
-cloudflare-app[app-id="back-to-top-button"][shape="circle"] {
+cloudflare-app[app="back-to-top-button"][shape="circle"] {
   border-radius: 50%;
 }
 
 @media (max-width: 786px) {
-  cloudflare-app[app-id="back-to-top-button"] {
+  cloudflare-app[app="back-to-top-button"] {
     height: 50px;
     width: 50px;
     font-size: 25px;
@@ -57,13 +71,13 @@ cloudflare-app[app-id="back-to-top-button"][shape="circle"] {
     bottom: 10px;
   }
 
-  cloudflare-app[app-id="back-to-top-button"][shape="rounded"] {
+  cloudflare-app[app="back-to-top-button"][shape="rounded"] {
     border-radius: 3px;
   }
 
 }
 
-cloudflare-app[app-id="back-to-top-button"] .cloudflare-icon {
+cloudflare-app[app="back-to-top-button"] .cloudflare-icon {
   bottom: 0;
   display: block;
   fill: #666666;

@@ -41,9 +41,9 @@ import easeInOutQuad from './ease-in-out-quad'
     })()
 
     const iconColor = backgroundColor.clone()
-
-    backgroundColor.setAlpha(0.2)
     iconColor.setAlpha(0.9)
+
+    backgroundColor.setAlpha(options.shape.showBackground ? 0.2 : 0)
 
     return {
       backgroundColor: backgroundColor.toRgbString(),
@@ -103,30 +103,36 @@ import easeInOutQuad from './ease-in-out-quad'
     icon.innerHTML = ''
     const path = document.createElementNS(xmlns, 'path')
 
-    path.setAttributeNS(null, 'd', ICONS[options.icon])
+    path.setAttributeNS(null, 'd', ICONS[options.shape.icon])
     icon.appendChild(path)
+  }
+
+  function setPosition () {
+    if (!element) return
+
+    element.setAttribute('data-position', options.position.value)
   }
 
   function setShape () {
     if (!element) return
-
-    element.setAttribute('shape', options.shape)
+    element.style.borderRadius = (element.clientHeight / 2 * options.shape.radius).toFixed(2) + 'px'
   }
 
   function updateElement () {
     element = document.createElement('cloudflare-app')
 
-    element.setAttribute('app-id', 'back-to-top-button')
+    element.setAttribute('app', 'back-to-top-button')
     element.addEventListener('click', backToTop)
 
     setVisibility()
     setIcon()
+    setPosition()
     element.appendChild(icon)
 
-    setShape()
     setColors()
 
     document.body.appendChild(element)
+    requestAnimationFrame(setShape)
   }
 
   function bootstrap () {
@@ -155,15 +161,17 @@ import easeInOutQuad from './ease-in-out-quad'
 
       setColors()
     },
-    updateIcon (nextOptions) {
-      options = nextOptions
-
-      setIcon()
-    },
     updateShape (nextOptions) {
       options = nextOptions
 
+      setIcon()
       setShape()
+      setColors()
+    },
+    updatePosition (nextOptions) {
+      options = nextOptions
+
+      setPosition()
     }
   }
 }())

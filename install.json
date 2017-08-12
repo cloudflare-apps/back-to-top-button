@@ -18,12 +18,12 @@
         "execute": "INSTALL_SCOPE.updateColors(INSTALL_OPTIONS)"
       },
       {
-        "options": ["icon"],
-        "execute": "INSTALL_SCOPE.updateIcon(INSTALL_OPTIONS)"
-      },
-      {
         "options": ["shape"],
         "execute": "INSTALL_SCOPE.updateShape(INSTALL_OPTIONS)"
+      },
+      {
+        "options": ["position"],
+        "execute": "INSTALL_SCOPE.updatePosition(INSTALL_OPTIONS)"
       }
     ]
   },
@@ -35,7 +35,8 @@
         "type": "object",
         "properties": {
           "strategy": {
-            "notitle": true,
+            "title": " ",
+            "description": "Which color should the button use?",
             "order": 0,
             "type": "string",
             "format": "radios",
@@ -47,10 +48,10 @@
               "custom"
             ],
             "enumNames": {
-              "automatic": "Automatic",
+              "automatic": "Use my site's background color",
               "dark": "Dark",
               "light": "Light",
-              "custom": "Custom"
+              "custom": "A custom color"
             }
           },
 
@@ -67,39 +68,76 @@
         }
       },
 
-      "icon": {
-        "title": "Icon",
+      "shape": {
+        "type": "object",
         "order": 1,
-        "type": "string",
-        "default": "fancy",
-        "enum": [
-          "fancy",
-          "line",
-          "pointer",
-          "triangle"
-        ],
-        "enumNames": {
-          "fancy": "Fancy",
-          "line": "Line",
-          "pointer": "Pointer",
-          "triangle": "Triangle"
+        "title": "Shape",
+        "properties": {
+          "icon": {
+            "order": 0,
+            "title": "Which symbol should the button use?",
+            "type": "string",
+            "default": "fancy",
+            "format": "radios",
+            "enum": [
+              "fancy",
+              "line",
+              "pointer",
+              "triangle"
+            ],
+            "enumNames": {
+              "fancy": "Arrow with line",
+              "line": "Slim chevron",
+              "pointer": "Up arrow",
+              "triangle": "Thick triangle"
+            }
+          },
+
+          "showBackground": {
+            "title": "Show background color",
+            "order": 1,
+            "type": "boolean",
+            "default": true
+          },
+
+          "radius": {
+            "showIf": "shape.showBackground",
+            "title": "How rounded should the button appear?",
+            "format": "slider",
+            "order": 2,
+            "type": "number",
+            "default": 0.16,
+            "step": 0.01,
+            "minimum": 0,
+            "maximum": 1.00
+          }
         }
       },
 
-      "shape": {
-        "title": "Shape",
+      "position": {
         "order": 2,
-        "type": "string",
-        "default": "rounded",
-        "enum": [
-          "square",
-          "rounded",
-          "circle"
-        ],
-        "enumNames": {
-          "square": "Square",
-          "rounded": "Rounded",
-          "circle": "Circle"
+        "type": "object",
+        "title": "Position",
+        "properties": {
+          "value": {
+            "order": 0,
+            "type": "string",
+            "title": "Which corner of the page should the button appear on?",
+            "default": "bottom-right",
+            "format": "radios",
+            "enum": [
+              "top-left",
+              "top-right",
+              "bottom-left",
+              "bottom-right"
+            ],
+            "enumNames": {
+              "top-left": "Top left",
+              "top-right": "Top right",
+              "bottom-left": "Bottom left",
+              "bottom-right": "Bottom right"
+            }
+          }
         }
       }
     }
